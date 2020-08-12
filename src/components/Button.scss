@@ -1,0 +1,82 @@
+$blue: #228be6;
+$gray: #495057;
+$pink: #d6336c;
+
+
+//반복되는 문구를 함수로 따로 빼놓는다
+@mixin button-color($color){
+    background: $color;
+    &:hover {
+        background: lighten($color, 10%); //색상을 10% 밝게
+    }
+    &:active {
+        background:  darken($color, 10%); //색상을 10% 어둡게
+    }
+    &.outline {
+        color: $color;
+        background: none;
+        border: 1px solid $color;
+        &:hover {
+        background: $color;
+        color: white;
+        }
+    }
+}
+
+
+.Button {
+    display: inline-flex;
+    //크롬 업데이트로 해달 코드2개를 추가해줘야 함!
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    outline: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    &.large {
+        height: 3rem;
+        font-size: 1.25rem;
+    }
+
+    &.medium {
+        height: 2.25rem;
+        font-size: 1rem;
+    }
+
+    &.small {
+        height: 1.75rem;
+        font-size: 0.875rem;
+    }
+
+
+    &.blue{
+        @include button-color($blue);
+    }
+
+
+    &.gray{
+        @include button-color($gray);
+    }
+
+
+    &.pink{
+        @include button-color($pink);
+    }
+
+    & + & {
+        margin-top: 1rem;
+    }
+
+    &.fullWidth {
+        width: 100%;
+        justify-content: center;
+        & + & {
+            margin-left: 0;
+            margin-top: 1rem;
+        }
+    }
+}
